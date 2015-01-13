@@ -1,4 +1,4 @@
-FROM amatas/nodejs
+FROM inclusivedesign/nodejs
 
 MAINTAINER Alfredo Matas "amatas@gmail.com"
 
@@ -15,6 +15,6 @@ cd /rbmm-nodejs && \
 npm install && \
 grunt dedupe-infusion
 
-EXPOSE 8082
+EXPOSE 8078
 
 CMD ["/usr/local/bin/run"]
