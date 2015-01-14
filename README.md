@@ -27,7 +27,7 @@ The following environment variables can be used to affect the container's behavi
     docker pull gpii/rbmm-nodejs
 
 
-#### Run `preferences-server`
+#### Run `rbmm-nodejs` (RuleBased MatchMaker NodeJS)
 
 This example asumes that [rbmm-java](https://github.com/gpii-ops/docker-rbmm-java) container is running and is accesible using a link connection:
 
