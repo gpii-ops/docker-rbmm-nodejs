@@ -1,10 +1,10 @@
 #!/bin/sh -e
 
 NODE_ENV=${RBMM_JAVA:-"production"}
-RBMM_JAVA=${RBMM_JAVA:-"rbmm-java"}
+RBMM_JAVA=${RBMM_JAVA:-"rbmm-java:8080"}
 
 cd /rbmm-nodejs
-sed -e "s|^ *url: .*$|url: \"http://${RBMM_JAVA}:8080/CLOUD4All_RBMM_Restful_WS/RBMM/runJSONLDRules\",|" -i lib/RuleBasedMatchMaker.js
+sed -e "s|^ *url: .*$|url: \"http://${RBMM_JAVA}/CLOUD4All_RBMM_Restful_WS/RBMM/runJSONLDRules\",|" -i lib/RuleBasedMatchMaker.js
 
 # Only for testing propose
 chown nobody /rbmm-nodejs/DEBUG/* -R
@@ -20,4 +20,5 @@ redirect_stderr=true
 stdout_logfile=/dev/stdout
 stdout_logfile_maxbytes=0
 EOF
+
 supervisord -c /etc/supervisord.conf
