@@ -48,4 +48,4 @@ gpii/rbmm-nodejs
 
     git clone https://github.com/NickKaklanis/RuleBased_MatchMaker.git
 
-    docker build --rm=true -t <your name>/rbmm-java:$(git --git-dir=RuleBased_MatchMaker/.git --work-tree=RuleBased_MatchMaker rev-parse --short HEAD) .
+    docker build --rm=true -t <your name>/rbmm-nodejs:$(git --git-dir=RuleBased_MatchMaker/.git --work-tree=RuleBased_MatchMaker rev-parse --short HEAD) .
