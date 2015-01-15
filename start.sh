@@ -1,20 +1,18 @@
 #!/bin/sh -e
 
 NODE_ENV=${RBMM_JAVA:-"production"}
-RBMM_JAVA=${RBMM_JAVA:-"rbmm-java:8080"}
+RBMM_JAVA_HOST_ADDRESS=${RBMM_JAVA:-"rbmm-java:8080"}
 
-cd /rbmm-nodejs
-sed -e "s|^ *url: .*$|url: \"http://${RBMM_JAVA}/CLOUD4All_RBMM_Restful_WS/RBMM/runJSONLDRules\",|" -i lib/RuleBasedMatchMaker.js
+sed -e "s|^ *url: .*$|url: \"http://${RBMM_JAVA_HOST_ADDRESS}/CLOUD4All_RBMM_Restful_WS/RBMM/runJSONLDRules\",|" -i /opt/rbmm-nodejs/lib/RuleBasedMatchMaker.js
 
-# Only for testing propose
-chown nobody /rbmm-nodejs/DEBUG/* -R
+# Only for testing purposes
+chown -R nobody /opt/rbmm-nodejs/DEBUG/*
 
-cat >/etc/supervisord.d/nodejs.ini<<EOF
-[program:nodejs]
-command=node bin/ruleBasedMatchMaker
+cat >/etc/supervisord.d/rbmm_nodejs.ini<<EOF
+[program:rbmm-nodejs]
+command=node /opt/rbmm-nodejs/bin/ruleBasedMatchMaker
 environment=NODE_ENV=${NODE_ENV}
 user=nobody
-directory=/rbmm-nodejs
 autorestart=true
 redirect_stderr=true
 stdout_logfile=/dev/stdout

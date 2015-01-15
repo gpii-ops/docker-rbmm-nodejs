@@ -1,22 +1,21 @@
 FROM inclusivedesign/nodejs:0.10.33
 
-MAINTAINER Alfredo Matas "amatas@gmail.com"
+RUN yum -y update && \
+    yum -y install git nodejs-grunt-cli && \
+    yum -y clean all
 
-RUN yum -y update \
-&& yum -y install git nodejs-grunt-cli \
-&& yum -y clean all
+COPY RuleBased_MatchMaker/package.json /opt/rbmm-nodejs/
 
-COPY package.json /rbmm-nodejs/
+RUN cd /opt/rbmm-nodejs/ && \
+    npm install
 
-RUN cd /rbmm-nodejs/ \
-&& npm install
+COPY RuleBased_MatchMaker/. /opt/rbmm-nodejs/
 
-COPY . /rbmm-nodejs
 COPY start.sh /usr/local/bin/start.sh
 
-RUN chmod +x /usr/local/bin/start.sh \
-&& cd /rbmm-nodejs \
-&& grunt dedupe-infusion
+RUN chmod +x /usr/local/bin/start.sh && \
+    cd /opt/rbmm-nodejs && \
+    grunt dedupe-infusion
 
 EXPOSE 8078
 
