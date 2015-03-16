@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
-NODE_ENV=${RBMM_JAVA:-"production"}
-RBMM_JAVA_HOST_ADDRESS=${RBMM_JAVA:-"rbmm-java:8080"}
+NODE_ENV=${NODE_ENV:-"production"}
+RBMM_JAVA_HOST_ADDRESS=${RBMM_JAVA_HOST_ADDRESS:-"rbmm-java:8080"}
 
 sed -e "s|^ *url: .*$|url: \"http://${RBMM_JAVA_HOST_ADDRESS}/CLOUD4All_RBMM_Restful_WS/RBMM/runJSONLDRules\",|" -i /opt/rbmm-nodejs/lib/RuleBasedMatchMaker.js
 
